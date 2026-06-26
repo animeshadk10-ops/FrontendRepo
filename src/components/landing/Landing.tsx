@@ -189,7 +189,7 @@ function Hero() {
           </span>
         </div>
 
-        <h1 className="enter-rise delay-2 mt-6 max-w-5xl text-balance text-6xl font-black leading-[1.1] sm:text-7xl md:text-8xl backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl px-12 py-8 shadow-2xl">
+        <h1 className="enter-rise delay-2 mt-6 max-w-5xl text-balance text-5xl sm:text-6xl md:text-8xl font-black leading-[1.1] backdrop-blur-xl bg-white/[0.02] border border-white/[0.05] rounded-3xl px-6 py-6 sm:px-12 sm:py-8 shadow-2xl">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-pink-500">
             POWER YOUR FUTURE WITH AI
           </span>
@@ -198,12 +198,12 @@ function Hero() {
           Nodal turns brittle prompts into observable, versioned agents — wired into your data, your tools, and your incident channel. From prototype to production in an afternoon.
         </p>
 
-        <div className="enter-rise delay-3 mt-10 flex flex-wrap items-center gap-5">
-          <a ref={ctaRef} href="#pricing" onMouseEnter={playTick} className="hover:scale-[1.05] transition-all duration-150 ease-out inline-flex h-14 items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-700 shadow-[0_0_25px_rgba(6,182,212,0.6)] px-8 font-mono text-sm font-bold uppercase tracking-widest text-white hover:brightness-110">
+        <div className="enter-rise delay-3 mt-10 flex flex-col sm:flex-row flex-wrap items-center gap-4 sm:gap-5">
+          <a ref={ctaRef} href="#pricing" onMouseEnter={playTick} className="hover:scale-[1.05] transition-all duration-150 ease-out flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-700 shadow-[0_0_25px_rgba(6,182,212,0.6)] px-8 font-mono text-sm font-bold uppercase tracking-widest text-white hover:brightness-110">
             BUILD A WORKFLOW
             <img src={chevRight} alt="" aria-hidden className="size-4 filter-[invert(1)]" />
           </a>
-          <a href="#features" onMouseEnter={playTick} className="transition-all duration-150 ease-out inline-flex h-14 items-center gap-2 rounded-full border border-white/20 bg-transparent px-8 font-mono text-sm uppercase tracking-widest text-white hover:bg-white/10">
+          <a href="#features" onMouseEnter={playTick} className="transition-all duration-150 ease-out flex w-full sm:w-auto h-14 items-center justify-center gap-2 rounded-full border border-white/20 bg-transparent px-8 font-mono text-sm uppercase tracking-widest text-white hover:bg-white/10">
             SEE THE ARCHITECTURE
           </a>
         </div>
