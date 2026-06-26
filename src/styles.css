@@ -1,0 +1,208 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* ============================================================
+   Phase 1 — AI Automation Landing
+   Palette (mandated): MP025
+     #F1F6F4  Arctic Powder
+     #D9E8E2  Mystic Mint
+     #FFC801  Forsythia
+     #FF9932  Deep Saffron
+     #114C5A  Nocturnal Expedition
+     #172B36  Oceanic Noir
+   Type (mandated): Inter (body), JetBrains Mono (display/code)
+   ============================================================ */
+
+@theme {
+  --color-forsythia: #06b6d4; /* Electric Cyan */
+  --color-saffron: #d946ef; /* Neon Magenta */
+  --color-arctic: #ffffff; /* Pure White */
+  --color-noir: #030712; /* Deep Midnight */
+  --color-mute: #6b7280;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.15);
+  --color-noir-soft: #1d3543;
+
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+
+  /* motion (brief: 150-200ms micro, 300-400ms structural) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io:  cubic-bezier(0.65, 0, 0.35, 1);
+  --t-micro: 180ms;
+  --t-struct: 360ms;
+}
+
+html, body { background: var(--color-noir); color: var(--color-arctic); }
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01","cv11","calt";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--color-forsythia); color: var(--color-noir); }
+
+* { border-color: var(--color-line); }
+
+.font-mono { font-family: var(--font-mono); }
+
+/* utility motion classes — native CSS only, no JS animation engine */
+@utility hover-tx {
+  transition: color var(--t-micro) var(--ease-out),
+              background-color var(--t-micro) var(--ease-out),
+              border-color var(--t-micro) var(--ease-out),
+              transform var(--t-micro) var(--ease-out),
+              opacity var(--t-micro) var(--ease-out);
+}
+@utility struct-tx {
+  transition: height var(--t-struct) var(--ease-io),
+              grid-template-rows var(--t-struct) var(--ease-io),
+              opacity var(--t-struct) var(--ease-io),
+              transform var(--t-struct) var(--ease-io);
+}
+
+/* ──────── Scroll Animations & Micro-interactions ──────── */
+.scroll-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  /* 400ms ease-out for scroll entries */
+  transition: opacity 400ms var(--ease-out),
+              transform 400ms var(--ease-out);
+}
+.scroll-fade-up.scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@utility hover-glow {
+  /* strictly 150-200ms ease-out */
+  transition: box-shadow 180ms var(--ease-out),
+              border-color 180ms var(--ease-out),
+              background-color 180ms var(--ease-out),
+              transform 180ms var(--ease-out),
+              color 180ms var(--ease-out);
+}
+.hover-glow {
+  transition: all var(--t-micro) ease-out;
+}
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.5); /* Cyan Glow */
+  border-color: rgba(6, 182, 212, 0.5) !important;
+  background-color: rgba(6, 182, 212, 0.1);
+}
+
+/* Entry orchestration — total <500ms */
+@keyframes lp-rise   { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes lp-fade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lp-grow   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes lp-spin   { to { transform: rotate(360deg); } }
+@keyframes lp-shimmer{ 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes lp-marquee{ from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes loader-out{ to { opacity: 0; visibility: hidden; } }
+
+.enter-rise  { opacity: 0; animation: lp-rise 420ms var(--ease-out) forwards; }
+.enter-fade  { opacity: 0; animation: lp-fade 360ms var(--ease-out) forwards; }
+.delay-1 { animation-delay: 60ms; }
+.delay-2 { animation-delay: 120ms; }
+.delay-3 { animation-delay: 180ms; }
+.delay-4 { animation-delay: 240ms; }
+.delay-5 { animation-delay: 300ms; }
+
+.grain::after {
+  content:"";
+  position: fixed; inset: 0; pointer-events: none; z-index: 60;
+  opacity: .035; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* hairline */
+.hair { background: linear-gradient(90deg, transparent, var(--color-line-strong), transparent); }
+
+/* shimmer underline for marquee dividers */
+.shimmer {
+  background: linear-gradient(90deg, transparent, var(--color-forsythia) 50%, transparent);
+  background-size: 200% 100%;
+  animation: lp-shimmer 3.6s linear infinite;
+}
+
+/* focus */
+:focus-visible {
+  outline: 2px solid var(--color-forsythia);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* card */
+.card {
+  background: linear-gradient(180deg, rgba(241,246,244,0.035), rgba(241,246,244,0.012));
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+}
+
+/* ──────── Feature section structural transitions ──────── */
+/* Brief mandate: 300-400ms, ease-in-out curve, native CSS only */
+/* Uses existing --t-struct (360ms) and --ease-io tokens */
+
+.feature-tx {
+  transition: border-color var(--t-struct) var(--ease-io),
+              box-shadow var(--t-struct) var(--ease-io),
+              transform var(--t-struct) var(--ease-io),
+              background var(--t-struct) var(--ease-io),
+              opacity var(--t-struct) var(--ease-io);
+}
+
+/* ──────── Pricing toggle micro-interactions ──────── */
+/* Brief mandate: 150-200ms, ease-out curve, native CSS only */
+
+/* Toggle group container — subtle border glow on interaction */
+.pricing-toggle-group {
+  transition: border-color 180ms var(--ease-out),
+              box-shadow 180ms var(--ease-out);
+}
+.pricing-toggle-group:focus-within {
+  border-color: var(--color-line-strong);
+  box-shadow: 0 0 0 1px rgba(241, 246, 244, 0.06);
+}
+
+/* Cycle toggle buttons — press scale feedback */
+.pricing-cycle-btn {
+  transition: color 180ms var(--ease-out),
+              transform 150ms var(--ease-out);
+  will-change: transform;
+}
+.pricing-cycle-btn:active {
+  transform: scale(0.96);
+}
+
+/* Sliding thumb — smooth position + subtle width pulse on settle */
+.pricing-toggle-thumb {
+  transition: left 200ms var(--ease-out),
+              transform 180ms var(--ease-out);
+  will-change: left;
+}
+
+/* Currency buttons — press scale + background morph */
+.pricing-currency-btn {
+  transition: color 180ms var(--ease-out),
+              background-color 180ms var(--ease-out),
+              transform 150ms var(--ease-out);
+  will-change: transform;
+}
+.pricing-currency-btn:active {
+  transform: scale(0.94);
+}
+.pricing-currency-btn[aria-checked="true"] {
+  transition: color 180ms var(--ease-out),
+              background-color 200ms var(--ease-out),
+              transform 150ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
